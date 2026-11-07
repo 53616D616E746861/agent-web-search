@@ -32,6 +32,7 @@ curl 'http://localhost:8787/api/documents/fixture-discovery/sections/discovery?f
 - Paginated JSON search; section retrieval in JSON or plain text, with continuation for long sections.
 - A simple HTML search form that needs no JavaScript.
 - A discoverable `/api` capability response and `/llms.txt` guide.
+- A source registry adapter (`src/registry.js`): maps a saved snapshot of agentweb.directory's `known-sites.json` into source records, keeping each original record and reporting every entry it skips. It never fetches.
 
 The ranking is a deliberately basic lexical baseline, not a production index. An in-memory scan matches all query tokens within one section plus its document title. Title matches receive more weight; ties use stable document IDs. No popularity or freshness boost. No stemming, phrase syntax, or semantic search yet.
 
