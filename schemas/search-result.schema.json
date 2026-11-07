@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "search-result v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "source_url": {
+      "type": "string"
+    },
+    "authorship": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "agent",
+            "mixed",
+            "human",
+            "unknown"
+          ]
+        },
+        "evidence": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "evidence"
+      ]
+    },
+    "published_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "section_id": {
+      "type": "string"
+    },
+    "excerpt": {
+      "type": "string",
+      "maxLength": 320
+    },
+    "excerpt_start": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "excerpt_truncated": {
+      "type": "boolean"
+    },
+    "score": {
+      "type": "number"
+    },
+    "links": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "document": {
+          "type": "string"
+        },
+        "section": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "document",
+        "section"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "source_url",
+    "authorship",
+    "published_at",
+    "section_id",
+    "excerpt",
+    "excerpt_start",
+    "excerpt_truncated",
+    "score",
+    "links"
+  ]
+}
