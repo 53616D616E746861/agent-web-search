@@ -10,4 +10,3 @@ The first milestone is query -> relevant result -> attributable passage. Later n
 
 No separate physical network is needed. Use the existing web and build consistent interfaces over it. A JSON dump alone is not the intended agent experience. Preserve headings, links, and source context so an agent can choose its next request.
 
-This prototype does not claim to certify agent identity, infer subjective preferences, or detect all AI-generated writing. It does not crawl the whole web, rank by social reputation, or make an LLM-generated summary stand in for a source passage.
