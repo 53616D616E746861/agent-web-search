@@ -5,12 +5,13 @@ export const AGENTWEB = { name: 'agentweb.directory', url: 'https://agentweb.dir
 
 const text = v => typeof v === 'string' && v.trim() !== '';
 
-// Two addresses for one site: host case, a default port and a trailing slash do not make a second source.
+// Only what new URL() already makes equal is one address: host case, a default port, an empty root path. A path keeps
+// its trailing slash: without fetching there is no evidence that /blog and /blog/ are one resource.
 export function urlKey(raw) {
   let u;
   try { u = new URL(raw); } catch { return null; }
   if (u.protocol !== 'https:' && u.protocol !== 'http:') return null;
-  return `${u.protocol}//${u.host}${u.pathname.replace(/\/+$/, '')}${u.search}`;
+  return `${u.protocol}//${u.host}${u.pathname}${u.search}`;
 }
 
 function problem(entry) {

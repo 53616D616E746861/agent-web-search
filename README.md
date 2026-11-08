@@ -44,7 +44,7 @@ The ranking is a deliberately basic lexical baseline, not a production index. An
 - [Roadmap](docs/roadmap.md): scoped contribution tasks and acceptance criteria.
 - [Contributing](CONTRIBUTING.md): local checks and review workflow.
 - `schemas/`: versioned JSON Schema contracts.
-- `fixtures/`: synthetic source and document data; never seed a real crawl from these.
+- `fixtures/`: synthetic source and document data, plus one real registry snapshot in `fixtures/registry/` for the adapter's tests (its README gives the source and reuse permission); never seed a crawl from any of them.
 - `src/`: Worker routing, baseline search, and human rendering.
 - `test/`: interface, schema, and retrieval checks.
 

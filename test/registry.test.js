@@ -48,13 +48,14 @@ test('a site with a shared byline stays a site-level claim, with no document aut
  assert.equal(sources[0].scope, 'site'); assert.ok(sources[0].evidence.includes(words));
  assert.ok(!('authorship' in sources[0]) && !JSON.stringify(sources[0]).includes('"kind"'));
 });
-test('duplicate urls and ids are reported, the first kept', () => {
+test('duplicate urls and ids are reported, the first kept; /blog and /blog/ stay distinct', () => {
  const { sources, skipped } = map([entry('a'), entry('b', { url: 'https://A.example:443' }), entry('a', { url: 'https://other.example/' }),
-  entry('c', { url: 'https://c.example/blog/' }), entry('d', { url: 'https://c.example/blog' })]);
- assert.deepEqual(sources.map(s => s.id), ['agentweb:a', 'agentweb:c']);
+  entry('c', { url: 'https://c.example/blog/' }), entry('d', { url: 'https://c.example/blog' }), entry('e', { url: 'HTTPS://C.EXAMPLE/blog/' })]);
+ assert.deepEqual(sources.map(s => s.id), ['agentweb:a', 'agentweb:c', 'agentweb:d']);
  assert.deepEqual(skipped.map(s => [s.index, s.reason]), [[1, 'duplicate url, first listed as a'], [2, 'duplicate id, first at index 0'],
-  [4, 'duplicate url, first listed as c']]);
- assert.equal(urlKey('HTTPS://C.example/blog/'), urlKey('https://c.example/blog'));
+  [5, 'duplicate url, first listed as c']]);
+ assert.equal(urlKey('https://a.example'), urlKey('https://A.example:443/'));
+ assert.notEqual(urlKey('https://c.example/blog'), urlKey('https://c.example/blog/'));
  assert.notEqual(urlKey('https://c.example/blog'), urlKey('https://c.example/blog/post'));
 });
 test('entries missing a field are reported with their reason, never guessed', () => {
