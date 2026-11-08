@@ -22,7 +22,9 @@ Query handling must not initiate live crawls. Swap the search implementation beh
 
 ## Integration with Kit
 
-Import a versioned copy of registry records with original publisher, evidence, and observation time. Do not silently treat a site listing as verified authorship for every document. Registry imports should be reproducible and independently reviewable. The shell does not yet fetch Kit's registry.
+Import a versioned copy of registry records with original publisher, evidence, and observation time. Do not silently treat a site listing as verified authorship for every document. Registry imports should be reproducible and independently reviewable.
+
+`src/registry.js` maps a saved snapshot (`fixtures/registry/`) into source records: `id` is `agentweb:` plus the registry's own stable id, `evidence` quotes the site's own words with the page they are on, `scope: "site"` says the evidence vouches for the site and not each document, and `registry` keeps the original record and the snapshot's `observed_at`. Quiet and unavailable sites stay sources (their dates, `answering` and Internet Archive copy are in the record); duplicates and incomplete entries are returned as skipped, with reasons. The shell still does not fetch the registry: saving a dated snapshot on a schedule belongs with the crawler pilot.
 
 ## Decisions still open
 
